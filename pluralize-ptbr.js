@@ -1,0 +1,114 @@
+var regras = {
+
+        /**
+         * Palavras que terminam em a|e|i|o|u|ã|ãe|ão
+         * apenas acrescenta a letra 's' no final
+         * @type {Object}
+         */
+        acrescentar: {
+            's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe', 'ão'],
+            'es' : ['r', 'z', 'n', 'ás', 'ês'],
+            ''   : ['is', 'us', 'os']
+        },
+
+        /**
+         * Palavras que terminam em al|el|ol|ul|il|m
+         * substitui a terminação
+         * @type {Object}
+         */
+        substituir: {
+            'ais' : 'al',
+            'eis' : 'el',
+            'ois' : 'ol',
+            'uis' : 'ul',
+            'is'  : 'il',
+            'ns'  : 'm'
+        },
+
+        /**
+         * Plural das sete exceções
+         * @type {Object}
+         */
+        excecoes: {
+            'males'    : 'mal',
+            'cônsules' : 'cônsul',
+            'méis' : 'mel',
+            'féis' : 'fel',
+            'cais' : 'cal'
+        }
+
+    };
+
+var plural = function plural( palavra ) {
+
+    var regex_troca =  "^([a-zA-Zà-úÀ-Ú]*)(%s)$"
+      , plural = "";
+
+    for ( var regra in regras ) {
+
+        switch ( regra ) {
+
+            case 'acrescentar':
+
+                for ( var adicao in regras[regra] ) {
+
+                    var busca = regex_troca.replace("%s", regras[regra][adicao].join("|"))
+                      , regex = new RegExp(busca, 'i');
+
+                    if ( regex.exec(palavra) !== null ) {
+                        plural = palavra + adicao;
+                        break;
+                    }
+
+                }
+
+            break;
+
+            case 'substituir':
+
+                for ( var substituicao in regras[regra] ) {
+
+                    var busca = regex_troca.replace("%s", regras[regra][substituicao])
+                      , regex = new RegExp(busca, 'i');
+
+                    if ( regex.exec(palavra) !== null ) {
+                        /**
+                         * Se a palavra for paroxítona ou proparoxítona,
+                         * troca-se 'il' por 'eis'
+                         */
+                        if ( palavra.match(/([áéíóú])/) !== null && regex.exec(palavra)[2] == "il" ) {
+                            plural = palavra.replace("il", "eis");
+                            break;
+                        } else {
+                            var busca_sub = new RegExp(regex.exec(palavra)[2] + '$', 'i');
+                            plural = palavra.replace(busca_sub, substituicao);
+                            break;
+                        }
+
+                    }
+
+                }
+
+            break;
+
+            case 'excecoes':
+
+                for ( var excecao in regras[regra] ) {
+                    if ( palavra == regras[regra][excecao] ) {
+                        plural = excecao;
+                        break;
+                    }
+                }
+
+            break;
+
+        }
+
+    }
+
+    return plural !== "" ? plural : palavra;
+
+}
+
+global.plural = plural;
+module.exports = plural;
