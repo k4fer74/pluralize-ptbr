@@ -1,6 +1,6 @@
 {
-  "name": "pluralize-ptbr",
-  "version": "1.0.3",
+  "name": "pluralize-words-ptbr",
+  "version": "1.0.4",
   "description": "Obtenha o plural em portugês (BR) de palavras no singular",
   "main": "pluralize-ptbr.js",
   "dependencies": {},
@@ -21,6 +21,6 @@
     "em",
     "portguês"
   ],
-  "author": "Matheus Lugon",
+  "author": "Luiz Felipe Bolsoni Gomes",
   "license": "ISC"
 }

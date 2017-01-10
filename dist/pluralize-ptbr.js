@@ -1,5 +1,4 @@
 (function e(t,n,r){function s(o,u){if(!n[o]){if(!t[o]){var a=typeof require=="function"&&require;if(!u&&a)return a(o,!0);if(i)return i(o,!0);var f=new Error("Cannot find module '"+o+"'");throw f.code="MODULE_NOT_FOUND",f}var l=n[o]={exports:{}};t[o][0].call(l.exports,function(e){var n=t[o][1][e];return s(n?n:e)},l,l.exports,e,t,n,r)}return n[o].exports}var i=typeof require=="function"&&require;for(var o=0;o<r.length;o++)s(r[o]);return s})({1:[function(require,module,exports){
-(function (global){
 var regras = {
 
         /**
@@ -37,11 +36,28 @@ var regras = {
             'méis' : 'mel',
             'féis' : 'fel',
             'cais' : 'cal'
-        }
+        },
 
+        /**
+         * Palavras que não tem plural
+         * @type {Object}
+         */
+        sem_plural: [
+          'não'
+        ],
     };
 
-var plural = function plural( palavra ) {
+var plural = function(palavras) {
+    var palavrasPlural = palavras.split(' ');
+
+    palavrasPlural.forEach(function(palavra, i) {
+        palavrasPlural[i] = _plural(palavra);
+    });
+
+    return palavrasPlural.join(' ');
+};
+
+var _plural = function plural( palavra ) {
 
     var regex_troca =  "^([a-zA-Zà-úÀ-Ú]*)(%s)$"
       , plural = "";
@@ -104,6 +120,12 @@ var plural = function plural( palavra ) {
 
             break;
 
+            case 'sem_plural':
+                regras[regra].forEach(function(r) {
+                  if (palavra === r) plural = palavra;
+                });
+
+            break;
         }
 
     }
@@ -112,8 +134,6 @@ var plural = function plural( palavra ) {
 
 }
 
-global.plural = plural;
+window.plural = plural;
 module.exports = plural;
-
-}).call(this,typeof global !== "undefined" ? global : typeof self !== "undefined" ? self : typeof window !== "undefined" ? window : {})
 },{}]},{},[1]);
