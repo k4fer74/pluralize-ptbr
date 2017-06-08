@@ -8,7 +8,7 @@ var regras = {
          */
         acrescentar: {
             's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe', 'ão'],
-            'es' : ['r', 'z', 'n', 'ás', 'ês'],
+            'es' : ['r', 'z', 'n', 'ás'],
             ''   : ['is', 'us', 'os']
         },
 
@@ -23,7 +23,8 @@ var regras = {
             'ois' : 'ol',
             'uis' : 'ul',
             'is'  : 'il',
-            'ns'  : 'm'
+            'ns'  : 'm',
+            'eses': 'ês'
         },
 
         /**
