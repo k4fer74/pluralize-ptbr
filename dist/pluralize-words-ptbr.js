@@ -7,7 +7,7 @@ var regras = {
          * @type {Object}
          */
         acrescentar: {
-            's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe', 'ão'],
+            's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe'],
             'es' : ['r', 'z', 'n', 'ás'],
             ''   : ['is', 'us', 'os']
         },
@@ -24,7 +24,8 @@ var regras = {
             'uis' : 'ul',
             'is'  : 'il',
             'ns'  : 'm',
-            'eses': 'ês'
+            'eses': 'ês',
+            'ões' : 'ão'
         },
 
         /**
