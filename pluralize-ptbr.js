@@ -6,8 +6,8 @@ var regras = {
          * @type {Object}
          */
         acrescentar: {
-            's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe', 'ão'],
-            'es' : ['r', 'z', 'n', 'ás', 'ês'],
+            's'  : ['a', 'e', 'i', 'o', 'u', 'ã', 'ãe'],
+            'es' : ['r', 'z', 'n', 'ás'],
             ''   : ['is', 'us', 'os']
         },
 
@@ -22,7 +22,9 @@ var regras = {
             'ois' : 'ol',
             'uis' : 'ul',
             'is'  : 'il',
-            'ns'  : 'm'
+            'ns'  : 'm',
+            'eses': 'ês',
+            'ões' : 'ão'
         },
 
         /**
@@ -35,11 +37,28 @@ var regras = {
             'méis' : 'mel',
             'féis' : 'fel',
             'cais' : 'cal'
-        }
+        },
 
+        /**
+         * Palavras que não tem plural
+         * @type {Object}
+         */
+        sem_plural: [
+          'não'
+        ],
     };
 
-var plural = function plural( palavra ) {
+var plural = function(palavras) {
+    var palavrasPlural = palavras.split(' ');
+
+    palavrasPlural.forEach(function(palavra, i) {
+        palavrasPlural[i] = _plural(palavra);
+    });
+
+    return palavrasPlural.join(' ');
+};
+
+var _plural = function plural( palavra ) {
 
     var regex_troca =  "^([a-zA-Zà-úÀ-Ú]*)(%s)$"
       , plural = "";
@@ -102,6 +121,12 @@ var plural = function plural( palavra ) {
 
             break;
 
+            case 'sem_plural':
+                regras[regra].forEach(function(r) {
+                  if (palavra === r) plural = palavra;
+                });
+
+            break;
         }
 
     }
@@ -110,5 +135,5 @@ var plural = function plural( palavra ) {
 
 }
 
-global.plural = plural;
+window.plural = plural;
 module.exports = plural;

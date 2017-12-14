@@ -9,12 +9,12 @@ gulp.task('browserify', function() {
         debug: false,
         entries: ['./pluralize-ptbr.js']
     }).bundle()
-        .pipe(source('pluralize-ptbr.js'))
+        .pipe(source('pluralize-words-ptbr.js'))
         .pipe(gulp.dest('./dist'));
 });
 
 gulp.task('compress', function() {
-    return gulp.src('./dist/pluralize-ptbr.js')
+    return gulp.src('./dist/pluralize-words-ptbr.js')
         .pipe(uglify().on('error', function(e){
             console.log(e);
          }))
@@ -25,5 +25,5 @@ gulp.task('compress', function() {
 })
 
 gulp.task('watch', function() {
-    return gulp.watch('./pluralize-ptbr.js', ['browserify']);
+    return gulp.watch('./pluralize-words-ptbr.js', ['browserify']);
 });
