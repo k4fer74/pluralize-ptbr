@@ -50,7 +50,7 @@ function ExibirAlerta(msgs) {
 
 ### Manualmente
 ```html
-<script src="https://raw.githubusercontent.com/k4fer74/pluralize-ptbr/master/dist/pluralize-words-ptbr.min.js"></script>
+<script src="https://raw.githubusercontent.com/k4fer74/pluralize-ptbr/master/pluralize-ptbr.browser.js"></script>
 
 <script>
     console.log(plural("projétil mão"));

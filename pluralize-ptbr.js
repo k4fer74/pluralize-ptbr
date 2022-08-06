@@ -135,5 +135,4 @@ var _plural = function plural( palavra ) {
 
 }
 
-window.plural = plural;
 module.exports = plural;
