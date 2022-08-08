@@ -1,5 +1,5 @@
 {
-  "name": "pluralize-words-ptbr",
+  "name": "pluralize-ptbr",
   "version": "1.0.4",
   "description": "Obtenha o plural em portugês brasileiro de palavras no singular",
   "main": "pluralize-ptbr.js",
